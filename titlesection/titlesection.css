@@ -10,6 +10,6 @@ button:hover  {
 #title {
     text-align: center;
     padding-top: 200px;
-    background-image: url('../images/Unsplash\ jpeg..jpg')
+    background-image: url('../images/Unsplash\ jpeg..jpg');
     background-position: center top;
 }
