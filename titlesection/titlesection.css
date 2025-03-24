@@ -10,6 +10,13 @@
     background-image: url('../images/Dart.jpg');
     background-position: center top;
 }
+.title-section-header {
+    margin-bottom: -5px;
+}
+
+.title-section-subtitle {
+    margin-bottom: 40px;
+}
 
 .title-section-button {
     color: var(--titleSectionPrimaryColor);
