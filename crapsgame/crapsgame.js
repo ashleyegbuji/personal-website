@@ -11,7 +11,11 @@ const crapsRegistrationPane = "craps-registration-pane"
 const crapsMainSection = "craps-main-section"
 const crapsStatsUsername = "craps-stats-username"
 const crapsStatsMoney = "craps-stats-money"
-const crapsStatsRounds = "craps-stats-Rounds"
+const crapsStatsRounds = "craps-stats-rounds"
+
+//In-game variables
+let currentMoney = startingMoney
+let currentRounds = startingRounds
 
 function registerCrapsPlayer () {
     let crapsUsername = document.getElementById(crapsUsernameInput).value
@@ -19,7 +23,7 @@ function registerCrapsPlayer () {
     // Username validation check
     let firstCharIsDigitRegex = /^[0-9]|[^a-zA-Z0-9_]/g
     if (crapsUsername.length < 5 || firstCharIsDigitRegex.test(crapsUsername)) {
-      alert("Username must be at least 5 characters long, alphanumeric and underscore only, no spaces")    
+      alert("Username must be at least 5 characters long, alphanumeric and underscore only, no spaces and cannot start with a number")    
     } else {
       removeRegistrationPane ()
       showMainGameSection ()
@@ -35,8 +39,10 @@ function showMainGameSection () {
 }
 function setupFirstRound () {
     document.getElementById(crapsStatsUsername).innerHTML = crapsUsername
+    currentMoney = startingMoney
+    currentRounds = startingRounds
     setMoney (startingMoney)
-    setRounds (5)
+    setRounds (currentRounds)
 }
 function setMoney (money) {
     document.getElementById(crapsStatsMoney).innerHTML = money
