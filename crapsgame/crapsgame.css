@@ -24,6 +24,7 @@
     margin: 0 auto;
     background-image: url('../images/Craps\ table.jpg'); 
     background-size: cover;
+    position: relative;
 }
 #craps-registration-pane {
     margin-top: calc(var(--height-scale) * 0.15);
@@ -48,13 +49,23 @@
 }
 #craps-main-section {
     display: none;
+    height: 100%;
+    
 }
 .craps-main-section-stats {
     font-size: calc(var(--height-scale) * 0.04);
     text-align: center;
-    margin-top: calc(var(--height-scale) * 0.15);;
+    margin-top: calc(var(--height-scale) * 0.15);
 }
 #craps-stats-money-container {
     font-size: calc(var(--height-scale) * 0.085);
     margin-top: calc(var(--height-scale) * 0.04);
+}
+.craps-round-manager {
+    position: absolute;
+    bottom: calc(var(--height-scale) * 0.04);
+    border: solid blue 4px;
+    width: 100%;
+    text-align: center;
+    font-size: calc(var(--height-scale) * 0.04);
 }
