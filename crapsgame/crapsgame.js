@@ -25,6 +25,7 @@ let currentMoney = startingMoney
 let currentRounds = startingRounds
 let currentBet = bets.even
 let currentBetAmount = minimumBet
+let canChangeBet = true
 
 function registerCrapsPlayer () {
     let crapsUsername = document.getElementById(crapsUsernameInput).value
@@ -48,17 +49,17 @@ function showMainGameSection () {
 }
 function setupFirstRound () {
     document.getElementById(crapsStatsUsername).innerHTML = crapsUsername
-    currentMoney = startingMoney
-    currentRounds = startingRounds
     setMoney (startingMoney)
-    setRounds (currentRounds)
+    setRounds (startingRounds)
     betEven()
     setBetAmount(minimumBet)
 }
 function setMoney (money) {
+    currentMoney = money
     document.getElementById(crapsStatsMoney).innerHTML = money
 }
 function setRounds (round) {
+    currentRounds = round
     document.getElementById(crapsStatsRounds).innerHTML = round
 }
 function betEven () {
@@ -68,10 +69,12 @@ function betOdd () {
     chooseBet = bets.odd
 }
 function chooseBet (bet) {
-    currentBet = bet 
-    document.getElementById(crapsRegistrationPane).style.backgroundColor = "red"
-    const deselectBet = bet == bets.even ? bets.odd : bets.even
-    document.getElementById(deselectBet).style.backgroundColor = "transparent"
+    if (canChangeBet) {
+        currentBet = bet 
+        document.getElementById(crapsRegistrationPane).style.backgroundColor = "red"
+        const deselectBet = bet == bets.even ? bets.odd : bets.even
+        document.getElementById(deselectBet).style.backgroundColor = "transparent"
+    }
 }
 function increaseBet () {
     // currentMoney
@@ -81,8 +84,10 @@ function decreaseBet () {
     currentBetAmount = Math.max(currentBet - minimumBet, minimumBet)
 }
 function setBetAmount (betAmount) {
-    currentBetAmount = BetAmount
-    document.getElementById(crapsUserBetAmount).innerHTML = "$" + betAmount
+    if (canChangeBet) {
+        currentBetAmount = BetAmount
+        document.getElementById(crapsUserBetAmount).innerHTML = "$" + betAmount
+    }
 }
 function rollDice() {
     formatDiceScale()
@@ -101,6 +106,19 @@ function formatDiceScale () {
 
 }
 function processDiceResult (diceResult) {
-    console.log(diceResult)
+    const sum = diceResult.reduce((partialSum, a) => partialSum + a, 0);
+    let diceSumResult = bets.even
+    if (sum % 2 === 1) {
+        diceSumResult = bets.odd
+    }
+    setRounds (currentRounds + 1)
+
+    if(diceSumResult === currentBet) {
+        // alert("YOU WIN!")
+        setMoney = (currentMoney + currentBetAmount)
+    } else {
+        // alert("YOU LOSE")
+        setMoney = (currentMoney - currentBetAmount)
+    }
 
 }
