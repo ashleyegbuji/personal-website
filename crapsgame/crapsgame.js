@@ -23,7 +23,8 @@ const crapsRollDiceAnimationContainer = "craps-roll-dice-animation-container"
 const crapsBettingGridContainer = "craps-betting-grid-container"
 const crapsRoundFinishGridContainer = "craps-round-finish-grid-container"
 const crapsRoundFinishMessage = "craps-round-finish-message"
-
+const crapsNextRoundButton = "craps-next-round-button"
+const crapsNextRoundButtonDisabled = "craps-next-round-button-disabled"
 //In-game variables
 let currentMoney = startingMoney
 let currentRounds = startingRounds
@@ -59,15 +60,21 @@ function hideMainGameSection () {
 }
 
 function setupFirstRound () {
+    document.getElementById(crapsStatsUsername).innerHTML = crapsUsername
+    document.getElementById(crapsNextRoundButtonDisabled).style.display = "none"
+    document.getElementById(crapsNextRoundButton).style.display = "block"
+    setMoney (startingMoney)
+    setRounds (startingRounds)
+    betEven()
+    setBetAmount(minimumBet)
+    setupNextRound()
+}
+function setupNextRound () {
     document.getElementById(crapsRollDiceAnimationContainer).style.display = "none"
     document.getElementById(crapsRoundFinishGridContainer).style.display = "none"
     document.getElementById(crapsRollDiceButton).style.display = "block"
     document.getElementById(crapsBettingGridContainer ).style.display = "block"
-    document.getElementById(crapsStatsUsername).innerHTML = crapsUsername
     canChangeBet = true
-    setMoney (startingMoney)
-    setRounds (startingRounds)
-    betEven()
     setBetAmount(minimumBet)
 }
 function setMoney (money) {
@@ -144,6 +151,8 @@ function processDiceResult (diceResult) {
     }
     if (currentMoney === 0) {
         roundFinishMessage = "YOU'RE OUT!"
+        document.getElementById(crapsNextRoundButtonDisabled).style.display = "block"
+        document.getElementById(crapsNextRoundButton).style.display = "none"
     }
  document.getElementById(crapsBettingGridContainer).style.display = "none"
  document.getElementById(crapsRoundFinishGridContainer).style.display = "block"
