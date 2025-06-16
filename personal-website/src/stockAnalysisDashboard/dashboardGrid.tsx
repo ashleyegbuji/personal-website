@@ -5,6 +5,7 @@ import { DashboardGridContent } from './stockAnalysisDashboard'
 import NumberStat from './numberStat'
 import LineChartContent from './lineChartContent'
 import NewsList from './newsLinks'
+import NewsSentimentAnalysis from './newsSentimentAnalysis'
 
 function DashboardGrid({stockData}:{stockData: any}) {
   useEffect(() => {
@@ -73,6 +74,13 @@ function DashboardGrid({stockData}:{stockData: any}) {
             <NewsList
               newsLinks={stockData.newsArticles}
             ></NewsList>
+          </DashboardGridContent>
+        </div>
+          <div className="grid-stack-item" gs-w="4" gs-h="2">More actions
+          <DashboardGridContent className="grid-stack-item-content">
+            <NewsSentimentAnalysis
+              newsTextAnalysis={stockData.newsTextAnalysis}
+            ></NewsSentimentAnalysis>
           </DashboardGridContent>
         </div>
         </div>
